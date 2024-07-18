@@ -1,0 +1,93 @@
+{
+    "tests":
+    [
+        {
+            "name": "v4l2-decoder-conformance-chromeos-av1",
+            "testsuite": "AV1-TEST-VECTORS",
+            "decoders":[
+                "GStreamer-AV1-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-av1-chromium-10bit",
+            "testsuite": "CHROMIUM-10bit-AV1-TEST-VECTORS",
+            "decoders":[
+                "GStreamer-AV1-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-h264",
+            "testsuite": "JVT-AVC_V1",
+            "decoders":[
+                "GStreamer-H.264-V4L2-Gst1.0",
+                "GStreamer-H.264-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8183-kukui-jacuzzi-juniper-sku16",
+                "mt8186-corsola-steelix-sku131072",
+                "mt8192-asurada-spherion-r0",
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-h264-frext",
+            "testsuite": "JVT-FR-EXT",
+            "decoders":[
+                "GStreamer-H.264-V4L2-Gst1.0",
+                "GStreamer-H.264-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8183-kukui-jacuzzi-juniper-sku16",
+                "mt8186-corsola-steelix-sku131072",
+                "mt8192-asurada-spherion-r0",
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-h265",
+            "testsuite": "JCT-VC-HEVC_V1",
+            "decoders":[
+                "GStreamer-H.265-V4L2-Gst1.0",
+                "GStreamer-H.265-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8183-kukui-jacuzzi-juniper-sku16",
+                "mt8186-corsola-steelix-sku131072",
+                "mt8192-asurada-spherion-r0",
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-vp8",
+            "testsuite": "VP8-TEST-VECTORS",
+            "decoders":[
+                "GStreamer-VP8-V4L2-Gst1.0",
+                "GStreamer-VP8-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8186-corsola-steelix-sku131072",
+                "mt8192-asurada-spherion-r0",
+                "mt8195-cherry-tomato-r2"
+            ]
+        },
+        {
+            "name": "v4l2-decoder-conformance-chromeos-vp9",
+            "testsuite": "VP9-TEST-VECTORS",
+            "decoders":[
+                "GStreamer-VP9-V4L2-Gst1.0",
+                "GStreamer-VP9-V4L2SL-Gst1.0"
+            ],
+            "platforms":[
+                "mt8186-corsola-steelix-sku131072",
+                "mt8192-asurada-spherion-r0",
+                "mt8195-cherry-tomato-r2"
+            ]
+        }
+    ]
+}
