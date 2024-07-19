@@ -25,7 +25,7 @@ import xml
 
 from junitparser import JUnitXml, Skipped
 
-FLUSTER_PATH = '/opt/fluster'
+FLUSTER_PATH = '/home/user'
 RESULTS_FILE = 'results.xml'
 
 
