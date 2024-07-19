@@ -150,6 +150,12 @@ actions:
               -o UserKnownHostsFile=/dev/null
               -i /home/cros/.ssh/id_rsa
               fluster_parser.py root@$(lava-target-ip):/home/user/
+            - lava-test-case touch-test --shell ./ssh_retry.sh
+              -o StrictHostKeyChecking=no
+              -o UserKnownHostsFile=/dev/null
+              -i /home/cros/.ssh/id_rsa
+              root@$(lava-target-ip)
+              touch /home/user/results.xml
             - ./ssh_retry.sh
               -o StrictHostKeyChecking=no
               -o UserKnownHostsFile=/dev/null
