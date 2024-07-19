@@ -68,8 +68,8 @@ def _load_results_file(filename):
 
 
 def _run_fluster(test_suite=None, timeout=None, jobs=None, decoders=None, skips=None):
-    cmd = ['python3', '/opt/fluster/fluster.py', '-r', '/opt/fluster/resources',
-            '-ne', 'run', '-f', 'junitxml', '-so', RESULTS_FILE]
+    cmd = ['python3', '/opt/fluster/fluster.py','-r', '/opt/fluster/resources',
+            '-ne', 'run','-f', 'junitxml', '-so', RESULTS_FILE]
 
     if test_suite:
         cmd.extend(['-ts', test_suite])

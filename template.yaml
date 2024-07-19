@@ -56,9 +56,9 @@ actions:
       minutes: 10
     timeouts:
       bootloader-commands:
-        minutes: 3
+        minutes: 10
       auto-login-action:
-        minutes: 2
+        minutes: 10
 
 - test:
     namespace: modules
@@ -86,7 +86,7 @@ actions:
 
 - deploy:
     dtb:
-      url: https://kciapistagingstorage1.file.core.windows.net/early-access/kbuild-gcc-12-arm64-chromeos-mediatek-66995b6baa07c494f8d68b19/dtbs/mediatek/mt8195-cherry-tomato-r2.dtb?sv=2022-11-02&ss=f&srt=sco&sp=r&se=2024-10-17T19:19:12Z&st=2023-10-17T11:19:12Z&spr=https&sig=sLmFlvZHXRrZsSGubsDUIvTiv%2BtzgDq6vALfkrtWnv8%3D
+      url: https://kciapistagingstorage1.file.core.windows.net/early-access/kbuild-gcc-12-arm64-chromeos-mediatek-66995b6baa07c494f8d68b19/dtbs/mediatek/DEVICE-NAME.dtb?sv=2022-11-02&ss=f&srt=sco&sp=r&se=2024-10-17T19:19:12Z&st=2023-10-17T11:19:12Z&spr=https&sig=sLmFlvZHXRrZsSGubsDUIvTiv%2BtzgDq6vALfkrtWnv8%3D
     kernel:
       url: https://kciapistagingstorage1.file.core.windows.net/early-access/kbuild-gcc-12-arm64-chromeos-mediatek-66995b6baa07c494f8d68b19/Image?sv=2022-11-02&ss=f&srt=sco&sp=r&se=2024-10-17T19:19:12Z&st=2023-10-17T11:19:12Z&spr=https&sig=sLmFlvZHXRrZsSGubsDUIvTiv%2BtzgDq6vALfkrtWnv8%3D
     namespace: chromeos
@@ -101,9 +101,9 @@ actions:
       minutes: 10
     timeouts:
       bootloader-commands:
-        minutes: 3
+        minutes: 10
       auto-login-action:
-        minutes: 2
+        minutes: 10
     failure_retry: 3
     method: depthcharge
     commands: emmc
@@ -144,13 +144,13 @@ actions:
               mkdir -p /usr/libexec/tast/bundles/remote/ && cp cros /usr/libexec/tast/bundles/remote/
             - for i in $(seq 1 60); do ping -c 1 -w 1 $(lava-target-ip) && break || sleep 1; done
             - ping -c 1 -w 1 $(lava-target-ip) || lava-test-raise "cros-device-unreachable"
-            - lava-test-case wget-test --shell wget https://github.com/denisyuji/T50517/raw/main/fluster_parser.py
-            - lava-test-case scp-test --shell scp
+            - wget https://github.com/denisyuji/T50517/raw/main/fluster_parser.py
+            - scp
               -o StrictHostKeyChecking=no
               -o UserKnownHostsFile=/dev/null
               -i /home/cros/.ssh/id_rsa
               fluster_parser.py root@$(lava-target-ip):/home/user/
-            - lava-test-case touch-test --shell ./ssh_retry.sh
+            - ./ssh_retry.sh
               -o StrictHostKeyChecking=no
               -o UserKnownHostsFile=/dev/null
               -i /home/cros/.ssh/id_rsa
@@ -162,3 +162,11 @@ actions:
               -i /home/cros/.ssh/id_rsa
               root@$(lava-target-ip)
               python3 /home/user/fluster_parser.py -ts TESTSUITE -d DECODERS
+            - scp
+              -o StrictHostKeyChecking=no
+              -o UserKnownHostsFile=/dev/null
+              -i /home/cros/.ssh/id_rsa
+              root@$(lava-target-ip):/home/user/results.xml .
+            - sed -i '5i\<property name=\"device\" value=\"DEVICE-NAME\"/>' results.xml
+            - sed -i '5i\<property name=\"test\" value=\"TEST-NAME\"/>' results.xml
+            - curl -X POST --data-binary @results.xml --header Content-Type:text/plain https://www.filestackapi.com/api/store/S3?key=FILESTACK-API-KEY
